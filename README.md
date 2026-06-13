@@ -11,9 +11,17 @@ Lighthouse (desktop, production build): **Accessibility 100 · Best Practices 10
 ```bash
 npm install
 npm run dev      # http://localhost:3000
-# production
-npm run build && npm run start
+# static production build -> ./out (host anywhere)
+npm run build
 ```
+
+The app is a fully static export (`output: 'export'`), so it can be hosted on any static host with no server.
+
+## Deploy
+
+- **Vercel (recommended):** import this repo at [vercel.com/new](https://vercel.com/new) — zero config, auto-redeploys on push. Leave `NEXT_PUBLIC_BASE_PATH` unset (serves at root).
+- **GitHub Pages:** the included workflow (`.github/workflows/deploy.yml`) builds with `NEXT_PUBLIC_BASE_PATH=/jatin-portfolio` and publishes `out/` on every push to `main`. Enable Pages → Source: GitHub Actions.
+- **Any static host (Netlify/Cloudflare Pages/S3):** upload the `out/` folder.
 
 ## What's inside
 
@@ -37,7 +45,7 @@ All content lives in **`src/content/profile.ts`** (and the assistant's intent ma
 | Greeting voice/audio | `public/audio/greeting.m4a` (regenerate: `say -v Rishi -o g.aiff "..." && afconvert g.aiff public/audio/greeting.m4a -f m4af -d aac`) |
 | Resume PDF | `public/Jatin-Fulwani-Resume.pdf` |
 | Calendar booking link | `BOOKING_URL` in `src/components/sections/Contact.tsx` |
-| Contact form delivery | set `WEB3FORMS_ACCESS_KEY` env var (else messages are logged server-side); `mailto:` fallback always works |
+| Contact form delivery | set `NEXT_PUBLIC_WEB3FORMS_KEY` (free key from web3forms.com) to deliver email; otherwise the form opens the visitor's mail client (`mailto:`) |
 | Theme tokens / colors | `src/app/globals.css` (`@theme` block) |
 
 ## Notes
