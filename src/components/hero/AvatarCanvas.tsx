@@ -16,7 +16,7 @@ import { useReducedMotion, useIsMobile } from "@/hooks/useMedia";
 
 function HoloPlatform() {
   return (
-    <group position={[0, -1.62, 0]}>
+    <group position={[0, -1.7, 0]}>
       <mesh rotation={[-Math.PI / 2, 0, 0]}>
         <ringGeometry args={[0.55, 0.6, 64]} />
         <meshBasicMaterial color="#38bdf8" toneMapped={false} transparent opacity={0.7} />
@@ -44,18 +44,19 @@ export default function AvatarCanvas() {
       shadows={false}
       className="!touch-pan-y"
     >
-      <PerspectiveCamera makeDefault fov={26} position={[0, 0.04, 2.4]} />
+      <PerspectiveCamera makeDefault fov={30} position={[0, 0.35, 5.6]} />
       <color attach="background" args={["#05060a"]} />
       <fog attach="fog" args={["#05060a", 4.5, 10]} />
 
       {/* Lighting */}
-      <ambientLight intensity={0.75} />
-      {/* frontal fill so the face reads clearly */}
-      <directionalLight position={[0, 0.6, 3]} intensity={1.8} color="#ffffff" />
-      <directionalLight position={[2.5, 2.5, 2]} intensity={2.2} color="#cfe8ff" />
-      <directionalLight position={[-3, 1, -0.5]} intensity={1.5} color="#a855f7" />
-      <pointLight position={[1.8, -0.3, 1.8]} intensity={5} color="#38bdf8" distance={7} />
-      <spotLight position={[0, 3, 2]} angle={0.5} penumbra={1} intensity={2.4} color="#7dd3fc" />
+      <ambientLight intensity={1.6} />
+      {/* strong frontal fill so the face/body read clearly */}
+      <directionalLight position={[0, 0.8, 3]} intensity={3.2} color="#ffffff" />
+      <directionalLight position={[2.5, 2.5, 2]} intensity={3} color="#cfe8ff" />
+      <directionalLight position={[-3, 1.5, 1]} intensity={2.2} color="#c4b5fd" />
+      <pointLight position={[1.8, 0.2, 2]} intensity={8} color="#38bdf8" distance={9} />
+      <pointLight position={[-1.8, 0.4, 2]} intensity={6} color="#a855f7" distance={9} />
+      <spotLight position={[0, 3, 2]} angle={0.6} penumbra={1} intensity={3.5} color="#ffffff" />
 
       <Suspense fallback={null}>
         <Environment resolution={256}>
@@ -87,7 +88,7 @@ export default function AvatarCanvas() {
         )}
 
         <ContactShadows
-          position={[0, -1.62, 0]}
+          position={[0, -1.7, 0]}
           opacity={0.5}
           scale={6}
           blur={2.6}
