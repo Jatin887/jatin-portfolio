@@ -90,12 +90,11 @@ export const person = {
   github: "https://github.com/Jatin887",
   githubHandle: "Jatin887",
   linkedin: "https://linkedin.com/in/jatin-fulwani-b5a3661ba",
-  resume: asset("/Jatin-Fulwani-Resume.pdf"),
   avatar: asset("/models/avatar.glb"),
   animations: asset("/models/animations.glb"),
-  greetingAudio: asset("/audio/greeting.m4a"),
+  greetingAudio: asset("/audio/greeting.mp3"),
   greetingText:
-    "Hi, I'm Jatin. I'm a Software Engineer specializing in Identity Governance, Full Stack Development, Cloud Technologies, and A.I. powered applications. Let me show you some of my work.",
+    "Hey, I'm Jatin, welcome in! I build the systems behind identity and the cloud, platforms that keep thousands of logins safe every single day. I love turning messy problems into things that just work, usually with a little AI magic on top. So go ahead, click around, ask my assistant anything, and let me show you what I've built.",
   summary:
     "Senior Software Engineer and engineering team lead with three-plus years building a multi-tenant identity governance platform end to end. I own the CI/CD platform and async workflow orchestration across 23 services on Kubernetes, designed a 38-source identity ingestion platform on tenant-isolated PostgreSQL, and lead production incident response. I ship across the full stack: schema, Go and GraphQL backend, and React frontend in the same cycle.",
   specialties: [

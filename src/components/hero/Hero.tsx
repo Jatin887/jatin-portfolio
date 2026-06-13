@@ -22,11 +22,13 @@ function CanvasFallback() {
 }
 
 const SUBTITLE_CHUNKS = [
-  "Hi, I'm Jatin.",
-  "I'm a Software Engineer specializing in Identity Governance,",
-  "Full Stack Development, Cloud Technologies,",
-  "and AI-powered applications.",
-  "Let me show you some of my work.",
+  "Hey, I'm Jatin — welcome in!",
+  "I build the systems behind identity and the cloud,",
+  "platforms that keep thousands of logins safe every single day.",
+  "I love turning messy problems into things that just work,",
+  "usually with a little AI magic on top.",
+  "So go ahead, click around, ask my assistant anything,",
+  "and let me show you what I've built.",
 ];
 
 function RotatingTitle() {
@@ -258,11 +260,10 @@ export default function Hero() {
               <span className="absolute inset-0 -translate-x-full bg-white/20 transition-transform duration-500 group-hover:translate-x-full" />
             </a>
             <a
-              href={person.resume}
-              download
+              href="#contact"
               className="rounded-full glass px-6 py-3 text-sm font-semibold text-foreground transition hover:bg-white/10"
             >
-              Download Resume
+              Get in touch
             </a>
           </div>
 
