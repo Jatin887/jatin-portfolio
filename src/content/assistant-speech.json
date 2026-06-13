@@ -1,0 +1,14 @@
+{
+  "who": "Jatin's a Senior Software Engineer and team lead who loves building reliable, large-scale platforms, from cloud infrastructure and CI/CD all the way to the product UI. Three plus years of shipping, and he's just getting started.",
+  "tech": "His go-to stack is Go, TypeScript and SQL, on top of Kubernetes, AWS and Argo for the platform side. He also builds React front-ends and AI agents. Explore the Tech Universe to see it all.",
+  "projects": "Oh, he's built some seriously cool stuff. A thirty-eight source identity platform, the CI/CD system behind twenty-three services, an analytics migration to DuckDB, and an AI bug-analysis agent that cut debugging time by sixty percent. Let me show you.",
+  "experience": "Jatin spent three plus years at BalkanID, growing from intern all the way to Senior Engineer and team lead. Before that, he shipped Android apps with over a hundred thousand downloads. Check out his journey.",
+  "contact": "Easy! You can reach Jatin by email, on GitHub, or on LinkedIn. Scrolling you down to the contact section now.",
+  "impact": "By the numbers: three plus years, thirty-eight integrations, twenty-three services, and thirty-four production hotfixes. He doubled the pod density and cut latency by sixty percent. Let me show you the dashboard.",
+  "approach": "Jatin's all about root cause over band-aid, reusing what already works, and shipping production-grade code every single time. Real outcomes, not buzzwords. Scrolling to How I Work.",
+  "identity": "Identity is his specialty. He built a platform that stitches thirty-eight different systems into one clean identity graph, plus provisioners for GitHub, Active Directory and Okta. Pretty neat, right?",
+  "cloud": "On the cloud side, Jatin owns the whole CI/CD and Kubernetes platform: seventeen services, GitOps delivery, and EKS tuning that nearly doubled how many pods each node can run.",
+  "ai": "He built an internal AI bug-analysis agent with the Model Context Protocol that runs twenty plus analyses a day, and cut manual debugging time by sixty percent. He's big on AI-augmented engineering.",
+  "education": "Jatin has a Computer Science degree from V I T with an eight point nine eight GPA, plus the Google Gen AI Academy certification.",
+  "fallback": "Hmm, I'm not sure about that one! But I can tell you about Jatin's background, his tech, his projects, his experience, or how to reach him. What would you like to know?"
+}

@@ -3,9 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ask, quickActions, type AssistantReply } from "@/content/assistant";
-import { useSpeech } from "@/hooks/useSpeech";
 import { person } from "@/content/profile";
-import { cn } from "@/lib/utils";
+import { cn, asset } from "@/lib/utils";
 
 interface Message {
   role: "user" | "assistant";
@@ -23,10 +22,32 @@ export default function Assistant() {
     },
   ]);
   const [input, setInput] = useState("");
-  const { speak, cancel, speaking, supported, enabled, setEnabled } = useSpeech();
   const listRef = useRef<HTMLDivElement>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [speaking, setSpeaking] = useState(false);
+  const [enabled, setEnabled] = useState(true);
   const [pulse, setPulse] = useState(true);
   const [showHint, setShowHint] = useState(false);
+
+  const stopSpeaking = () => {
+    audioRef.current?.pause();
+    setSpeaking(false);
+  };
+
+  // Plays the pre-baked ElevenLabs clip for this answer (same voice as the hero).
+  const speakReply = (id?: string) => {
+    if (!enabled || !id) return;
+    if (!audioRef.current) audioRef.current = new Audio();
+    const a = audioRef.current;
+    a.src = asset(`/audio/assistant/${id}.mp3`);
+    a.onplay = () => setSpeaking(true);
+    a.onended = () => setSpeaking(false);
+    a.onerror = () => setSpeaking(false);
+    try {
+      a.currentTime = 0;
+    } catch {}
+    a.play().catch(() => setSpeaking(false));
+  };
 
   useEffect(() => {
     listRef.current?.scrollTo({ top: listRef.current.scrollHeight, behavior: "smooth" });
@@ -52,7 +73,7 @@ export default function Assistant() {
       { role: "assistant", text: reply.text, suggestions: reply.suggestions },
     ]);
     setInput("");
-    if (enabled) speak(reply.text);
+    speakReply(reply.id);
     if (reply.scrollTo) {
       setTimeout(() => {
         document.getElementById(reply.scrollTo!)?.scrollIntoView({ behavior: "smooth" });
@@ -135,18 +156,16 @@ export default function Assistant() {
                 <p className="font-display text-sm font-semibold text-foreground">Jarvis</p>
                 <p className="text-[11px] text-muted">{speaking ? "speaking…" : "portfolio assistant"}</p>
               </div>
-              {supported && (
-                <button
-                  onClick={() => {
-                    if (speaking) cancel();
-                    setEnabled(!enabled);
-                  }}
-                  className="rounded-full glass px-2.5 py-1 text-[11px] text-muted transition hover:text-neon-cyan"
-                  title="Toggle voice"
-                >
-                  {enabled ? "🔊 voice" : "🔇 muted"}
-                </button>
-              )}
+              <button
+                onClick={() => {
+                  stopSpeaking();
+                  setEnabled((e) => !e);
+                }}
+                className="rounded-full glass px-2.5 py-1 text-[11px] text-muted transition hover:text-neon-cyan"
+                title="Toggle voice"
+              >
+                {enabled ? "🔊 voice" : "🔇 muted"}
+              </button>
             </div>
 
             {/* messages */}
