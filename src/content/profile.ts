@@ -94,7 +94,7 @@ export const person = {
   animations: asset("/models/animations.glb"),
   greetingAudio: asset("/audio/greeting.mp3"),
   greetingText:
-    "Hey, I'm Jatin, welcome in! I build the systems behind identity and the cloud, platforms that keep thousands of logins safe every single day. I love turning messy problems into things that just work, usually with a little AI magic on top. So go ahead, click around, ask my assistant anything, and let me show you what I've built.",
+    "Hey! I'm Jatin, and I'm so glad you're here! I'm a software engineer who loves turning wild ideas into things that actually work. Think of this little robot as my sidekick, here to show you around. So go on, explore, click around, ask my assistant anything, and let's build something awesome together!",
   summary:
     "Senior Software Engineer and engineering team lead with three-plus years building a multi-tenant identity governance platform end to end. I own the CI/CD platform and async workflow orchestration across 23 services on Kubernetes, designed a 38-source identity ingestion platform on tenant-isolated PostgreSQL, and lead production incident response. I ship across the full stack: schema, Go and GraphQL backend, and React frontend in the same cycle.",
   specialties: [
