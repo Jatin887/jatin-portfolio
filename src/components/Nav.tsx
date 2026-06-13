@@ -88,13 +88,12 @@ export default function Nav() {
           </div>
 
           <div className="flex items-center gap-2">
-            <a
-              href={person.resume}
-              download
+            <button
+              onClick={() => go("contact")}
               className="hidden rounded-full bg-gradient-to-r from-neon-blue to-neon-purple px-4 py-1.5 text-sm font-semibold text-white shadow-glow-purple transition hover:opacity-90 sm:inline-block"
             >
-              Resume
-            </a>
+              Let&apos;s talk
+            </button>
             <button
               aria-label="Toggle menu"
               onClick={() => setOpen((o) => !o)}
@@ -137,13 +136,12 @@ export default function Nav() {
                   {n.label}
                 </button>
               ))}
-              <a
-                href={person.resume}
-                download
+              <button
+                onClick={() => go("contact")}
                 className="col-span-2 mt-1 rounded-xl bg-gradient-to-r from-neon-blue to-neon-purple px-4 py-3 text-center text-sm font-semibold text-white"
               >
-                Download Resume
-              </a>
+                Get in touch
+              </button>
             </motion.div>
           </motion.div>
         )}

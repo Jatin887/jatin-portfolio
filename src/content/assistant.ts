@@ -92,9 +92,9 @@ const intents: Intent[] = [
     id: "contact",
     keywords: ["contact", "reach", "email", "hire", "connect", "linkedin", "github", "talk", "message", "get in touch", "available"],
     answer: () => ({
-      text: `You can reach Jatin at ${person.email}, on GitHub (${person.githubHandle}) or on LinkedIn. There is a contact console and a resume download at the bottom of the page. Taking you there now.`,
+      text: `You can reach Jatin at ${person.email}, on GitHub (${person.githubHandle}), or on LinkedIn. Scrolling you to the contact section now.`,
       scrollTo: "contact",
-      suggestions: ["Download resume", "His projects", "What technologies?"],
+      suggestions: ["His projects", "What technologies?", "His experience"],
     }),
   },
   {

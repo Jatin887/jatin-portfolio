@@ -1,226 +1,104 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { person, socials } from "@/content/profile";
+import { person } from "@/content/profile";
 import { SectionHeading } from "@/components/fx/Reveal";
 
-type Status = "idle" | "sending" | "sent" | "error";
-
-// Replace with your real Cal.com / Calendly link.
-const BOOKING_URL = "https://cal.com";
+const channels = [
+  {
+    label: "GitHub",
+    handle: "@Jatin887",
+    href: person.github,
+    color: "#e7edf7",
+    icon: (
+      <path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.09.68-.22.68-.49l-.01-1.7c-2.78.62-3.37-1.37-3.37-1.37-.46-1.18-1.11-1.5-1.11-1.5-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.36-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.32 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9l-.01 2.82c0 .27.18.59.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z" />
+    ),
+  },
+  {
+    label: "LinkedIn",
+    handle: "Jatin Fulwani",
+    href: person.linkedin,
+    color: "#38bdf8",
+    icon: (
+      <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14ZM8.34 18.34v-7.2H6.06v7.2h2.28ZM7.2 10.1a1.32 1.32 0 1 0 0-2.64 1.32 1.32 0 0 0 0 2.64Zm11.14 8.24v-4.13c0-2.2-1.18-3.23-2.75-3.23-1.27 0-1.83.7-2.15 1.19v-1.03h-2.28c.03.64 0 7.2 0 7.2h2.28v-4.02c0-.2.01-.41.07-.55.17-.41.54-.84 1.18-.84.83 0 1.17.63 1.17 1.56v3.85h2.28Z" />
+    ),
+  },
+  {
+    label: "Email",
+    handle: person.email,
+    href: `mailto:${person.email}`,
+    color: "#a855f7",
+    icon: (
+      <>
+        <rect x="3" y="5" width="18" height="14" rx="2" />
+        <path d="m3 7 9 6 9-6" />
+      </>
+    ),
+  },
+];
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [status, setStatus] = useState<Status>("idle");
-  const [error, setError] = useState("");
-
-  // Fully client-side so the site stays static (host anywhere, no server).
-  // Delivers via Web3Forms when a public key is set, else opens the mail client.
-  const submit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus("sending");
-    setError("");
-    const key = process.env.NEXT_PUBLIC_WEB3FORMS_KEY;
-    try {
-      if (key) {
-        const res = await fetch("https://api.web3forms.com/submit", {
-          method: "POST",
-          headers: { "Content-Type": "application/json", Accept: "application/json" },
-          body: JSON.stringify({
-            access_key: key,
-            subject: `Portfolio message from ${form.name}`,
-            from_name: form.name,
-            email: form.email,
-            message: form.message,
-          }),
-        });
-        const data = await res.json();
-        if (!data.success) throw new Error(data.message || "Failed to send");
-      } else {
-        const body = encodeURIComponent(`${form.message}\n\nFrom: ${form.name} <${form.email}>`);
-        const subject = encodeURIComponent(`Portfolio message from ${form.name}`);
-        window.location.href = `mailto:${person.email}?subject=${subject}&body=${body}`;
-      }
-      setStatus("sent");
-      setForm({ name: "", email: "", message: "" });
-    } catch (err) {
-      setStatus("error");
-      setError(err instanceof Error ? err.message : "Something went wrong.");
-    }
-  };
-
   return (
     <section id="contact" className="section">
       <SectionHeading
         eyebrow="Command Center"
         title={<>Let&apos;s build something <span className="text-gradient-neon">great</span></>}
-        subtitle="Open to senior and staff engineering roles. Drop a message, book a call, or grab the resume."
+        subtitle="Open to senior and staff engineering roles. The fastest ways to reach me are below."
       />
 
-      <div className="mx-auto grid max-w-5xl grid-cols-1 gap-5 lg:grid-cols-[1.2fr_1fr]">
-        {/* Console / form */}
-        <div className="relative overflow-hidden rounded-3xl holo-border p-7">
+      <div className="mx-auto max-w-4xl">
+        <div className="relative overflow-hidden rounded-3xl holo-border p-8 sm:p-10">
           {/* radar backdrop */}
-          <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 opacity-20">
+          <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 opacity-20">
             <div className="absolute inset-0 rounded-full border border-neon-blue/40" />
-            <div className="absolute inset-6 rounded-full border border-neon-blue/30" />
-            <div className="absolute inset-12 rounded-full border border-neon-blue/20" />
-            <div className="absolute inset-0 origin-center animate-spin-slow" style={{ background: "conic-gradient(from 0deg, transparent 70%, rgba(56,189,248,0.4))", borderRadius: "9999px" }} />
+            <div className="absolute inset-8 rounded-full border border-neon-blue/30" />
+            <div className="absolute inset-16 rounded-full border border-neon-blue/20" />
+            <div
+              className="absolute inset-0 origin-center animate-spin-slow"
+              style={{ background: "conic-gradient(from 0deg, transparent 70%, rgba(56,189,248,0.4))", borderRadius: "9999px" }}
+            />
           </div>
 
           <div className="relative">
-            <div className="mb-5 flex items-center gap-2">
-              <span className="h-2.5 w-2.5 rounded-full bg-neon-green animate-pulse" />
+            <div className="mb-6 flex items-center gap-2">
+              <span className="h-2.5 w-2.5 animate-pulse rounded-full bg-neon-green" />
               <span className="font-mono text-xs uppercase tracking-wider text-muted">channel open</span>
             </div>
 
-            {status === "sent" ? (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="flex flex-col items-center justify-center py-12 text-center"
-              >
-                <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-neon-green/15 text-3xl text-neon-green">
-                  ✓
-                </div>
-                <p className="font-display text-xl text-foreground">Message transmitted</p>
-                <p className="mt-2 text-sm text-muted">Jatin will get back to you shortly.</p>
-                <button onClick={() => setStatus("idle")} className="mt-5 rounded-full glass px-4 py-2 text-sm text-muted hover:text-neon-cyan">
-                  Send another
-                </button>
-              </motion.div>
-            ) : (
-              <form onSubmit={submit} className="space-y-4">
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  <Field label="Name" htmlFor="name">
-                    <input
-                      id="name"
-                      required
-                      value={form.name}
-                      onChange={(e) => setForm({ ...form, name: e.target.value })}
-                      className="input"
-                      placeholder="Your name"
-                    />
-                  </Field>
-                  <Field label="Email" htmlFor="email">
-                    <input
-                      id="email"
-                      type="email"
-                      required
-                      value={form.email}
-                      onChange={(e) => setForm({ ...form, email: e.target.value })}
-                      className="input"
-                      placeholder="you@company.com"
-                    />
-                  </Field>
-                </div>
-                <Field label="Message" htmlFor="message">
-                  <textarea
-                    id="message"
-                    required
-                    rows={4}
-                    value={form.message}
-                    onChange={(e) => setForm({ ...form, message: e.target.value })}
-                    className="input resize-none"
-                    placeholder="What are you building?"
-                  />
-                </Field>
-
-                {status === "error" && <p className="text-sm text-neon-pink">{error}</p>}
-
-                <div className="flex flex-wrap items-center gap-3">
-                  <button
-                    type="submit"
-                    disabled={status === "sending"}
-                    className="group relative overflow-hidden rounded-full bg-gradient-to-r from-neon-blue to-neon-purple px-6 py-3 text-sm font-semibold text-white shadow-glow-purple disabled:opacity-60"
-                  >
-                    <span className="relative z-10">{status === "sending" ? "Transmitting…" : "Send Message"}</span>
-                  </button>
-                  <a
-                    href={`mailto:${person.email}`}
-                    className="rounded-full glass px-5 py-3 text-sm text-foreground transition hover:bg-white/10"
-                  >
-                    Or email directly
-                  </a>
-                </div>
-              </form>
-            )}
-          </div>
-        </div>
-
-        {/* Side: links + actions */}
-        <div className="space-y-4">
-          <div className="rounded-3xl glass p-6">
-            <h3 className="mb-4 font-mono text-xs uppercase tracking-wider text-neon-cyan">Direct channels</h3>
-            <div className="space-y-2">
-              {socials.map((s) => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  target={s.href.startsWith("http") ? "_blank" : undefined}
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+              {channels.map((c, i) => (
+                <motion.a
+                  key={c.label}
+                  href={c.href}
+                  target={c.href.startsWith("http") ? "_blank" : undefined}
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between rounded-xl bg-white/5 px-4 py-3 transition hover:bg-white/10"
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                  className="group flex flex-col items-center gap-3 rounded-2xl bg-white/5 p-6 text-center transition hover:bg-white/10"
+                  style={{ boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.06)" }}
                 >
-                  <span className="text-sm font-medium text-foreground">{s.label}</span>
-                  <span className="text-xs text-muted">{s.handle}</span>
-                </a>
+                  <span
+                    className="flex h-14 w-14 items-center justify-center rounded-2xl transition-transform group-hover:scale-110"
+                    style={{ background: `${c.color}1a`, boxShadow: `0 0 22px ${c.color}33` }}
+                  >
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill={c.label === "Email" ? "none" : c.color} stroke={c.label === "Email" ? c.color : "none"} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      {c.icon}
+                    </svg>
+                  </span>
+                  <span className="font-display text-lg font-semibold text-foreground">{c.label}</span>
+                  <span className="break-all text-xs text-muted">{c.handle}</span>
+                </motion.a>
               ))}
             </div>
-          </div>
 
-          <div className="rounded-3xl holo-border p-6">
-            <h3 className="mb-3 font-mono text-xs uppercase tracking-wider text-neon-cyan">Take the next step</h3>
-            <div className="flex flex-col gap-2">
-              <a
-                href={BOOKING_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-neon-blue to-neon-purple px-5 py-3 text-sm font-semibold text-white"
-              >
-                📅 Book a 15-min call
-              </a>
-              <a
-                href={person.resume}
-                download
-                className="flex items-center justify-center gap-2 rounded-full glass px-5 py-3 text-sm font-semibold text-foreground transition hover:bg-white/10"
-              >
-                ⬇ Download Resume
-              </a>
-            </div>
-            <p className="mt-3 text-center text-xs text-faint">{person.location} · open to remote</p>
+            <p className="mt-6 text-center text-xs text-faint">
+              {person.location} · open to remote · usually replies within a day
+            </p>
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        :global(.input) {
-          width: 100%;
-          border-radius: 0.75rem;
-          background: rgba(255, 255, 255, 0.05);
-          padding: 0.75rem 1rem;
-          font-size: 0.875rem;
-          color: var(--color-foreground);
-          outline: none;
-          box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
-          transition: box-shadow 0.2s;
-        }
-        :global(.input:focus) {
-          box-shadow: inset 0 0 0 1px rgba(56, 189, 248, 0.6);
-        }
-        :global(.input::placeholder) {
-          color: var(--color-faint);
-        }
-      `}</style>
     </section>
-  );
-}
-
-function Field({ label, htmlFor, children }: { label: string; htmlFor: string; children: React.ReactNode }) {
-  return (
-    <label htmlFor={htmlFor} className="block">
-      <span className="mb-1.5 block text-xs font-medium text-muted">{label}</span>
-      {children}
-    </label>
   );
 }
