@@ -23,7 +23,9 @@ jobs:
         with:
           node-version: 20
           cache: npm
-      - run: npm ci
+      # npm install (not ci) so Linux-only optional native deps resolve
+      # even though the lockfile was generated on macOS.
+      - run: npm install --no-audit --no-fund
       - name: Build static export
         run: npm run build
         env:
