@@ -5,12 +5,48 @@ import { motion, AnimatePresence } from "framer-motion";
 import { person } from "@/content/profile";
 
 const BOOT_LINES = [
-  "> initializing neural interface ...",
-  "> loading identity matrix ........ ok",
-  "> mounting portfolio modules ..... ok",
-  "> calibrating digital human ...... ok",
-  "> JF.OS ready",
+  "> booting up the robot ........... ok",
+  "> loading Jatin's brain .......... ok",
+  "> charging enthusiasm ........... 100%",
+  "> all systems online",
 ];
+
+function Core() {
+  return (
+    <div className="relative mb-9 h-32 w-32" style={{ perspective: 600 }}>
+      <div className="absolute inset-0 rounded-full bg-neon-blue/20 blur-2xl animate-pulse-glow" />
+      <motion.div
+        className="absolute inset-0 rounded-full border-2 border-neon-blue/60"
+        animate={{ rotateX: 360 }}
+        transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+      />
+      <motion.div
+        className="absolute inset-2 rounded-full border-2 border-neon-purple/60"
+        animate={{ rotateY: 360 }}
+        transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+      />
+      <motion.div
+        className="absolute inset-5 rounded-full border border-neon-cyan/50"
+        animate={{ rotateZ: 360 }}
+        transition={{ duration: 9, repeat: Infinity, ease: "linear" }}
+      />
+      <div
+        className="absolute inset-[38%] rounded-full bg-gradient-to-br from-neon-blue to-neon-purple animate-pulse-glow"
+        style={{ boxShadow: "0 0 28px rgba(56,189,248,0.8), 0 0 50px rgba(168,85,247,0.5)" }}
+      />
+      <motion.div
+        className="absolute inset-0"
+        animate={{ rotate: 360 }}
+        transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+      >
+        <span
+          className="absolute -top-1 left-1/2 h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-neon-cyan"
+          style={{ boxShadow: "0 0 12px #22d3ee" }}
+        />
+      </motion.div>
+    </div>
+  );
+}
 
 export default function BootOverlay({
   visible,
@@ -28,15 +64,17 @@ export default function BootOverlay({
     const step = () => {
       if (cancelled) return;
       n++;
-      setLines(BOOT_LINES.slice(0, n)); // deterministic: never skips or duplicates
-      if (n < BOOT_LINES.length) setTimeout(step, 360);
+      setLines(BOOT_LINES.slice(0, n));
+      if (n < BOOT_LINES.length) setTimeout(step, 320);
     };
-    const id = setTimeout(step, 360);
+    const id = setTimeout(step, 320);
     return () => {
       cancelled = true;
       clearTimeout(id);
     };
   }, [visible]);
+
+  const ready = lines.length >= BOOT_LINES.length;
 
   return (
     <AnimatePresence>
@@ -48,17 +86,14 @@ export default function BootOverlay({
           className="fixed inset-0 z-[90] flex flex-col items-center justify-center bg-base px-6"
         >
           <div className="absolute inset-0 grid-bg opacity-40" />
+          <div
+            className="glow-orb animate-pulse-glow"
+            style={{ top: "20%", left: "35%", width: 360, height: 360, background: "#6d28d9" }}
+          />
           <div className="relative flex flex-col items-center">
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.6 }}
-              className="mb-8 flex h-20 w-20 items-center justify-center rounded-2xl holo-border font-display text-3xl font-bold text-neon-cyan neon-text"
-            >
-              JF
-            </motion.div>
+            <Core />
 
-            <div className="mb-10 h-32 w-full max-w-sm font-mono text-xs text-neon-cyan/80 sm:text-sm">
+            <div className="mb-9 h-24 w-full max-w-sm font-mono text-xs text-neon-cyan/80 sm:text-sm">
               {lines.map((l, i) => (
                 <motion.p
                   key={i}
@@ -73,8 +108,8 @@ export default function BootOverlay({
 
             <motion.button
               initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: lines.length >= BOOT_LINES.length ? 1 : 0.3, y: 0 }}
-              disabled={lines.length < BOOT_LINES.length}
+              animate={{ opacity: ready ? 1 : 0.3, y: 0 }}
+              disabled={!ready}
               onClick={onInitialize}
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.97 }}
@@ -88,7 +123,7 @@ export default function BootOverlay({
             </motion.button>
 
             <p className="mt-5 max-w-xs text-center text-xs text-faint">
-              Loads a 3D avatar with voice narration. Best with sound on.
+              Meet my robot sidekick — with voice. Best with sound on.
             </p>
           </div>
         </motion.div>

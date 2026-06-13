@@ -26,10 +26,21 @@ export default function Assistant() {
   const { speak, cancel, speaking, supported, enabled, setEnabled } = useSpeech();
   const listRef = useRef<HTMLDivElement>(null);
   const [pulse, setPulse] = useState(true);
+  const [showHint, setShowHint] = useState(false);
 
   useEffect(() => {
     listRef.current?.scrollTo({ top: listRef.current.scrollHeight, behavior: "smooth" });
   }, [messages, open]);
+
+  // Surface a hint so visitors notice the assistant exists.
+  useEffect(() => {
+    const show = setTimeout(() => setShowHint(true), 4000);
+    const hide = setTimeout(() => setShowHint(false), 16000);
+    return () => {
+      clearTimeout(show);
+      clearTimeout(hide);
+    };
+  }, []);
 
   const handle = (raw: string) => {
     const q = raw.trim();
@@ -51,6 +62,27 @@ export default function Assistant() {
 
   return (
     <>
+      {/* Discoverability hint */}
+      <AnimatePresence>
+        {showHint && !open && (
+          <motion.button
+            initial={{ opacity: 0, x: 12, scale: 0.9 }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
+            exit={{ opacity: 0, x: 12, scale: 0.9 }}
+            onClick={() => {
+              setOpen(true);
+              setPulse(false);
+              setShowHint(false);
+            }}
+            className="fixed bottom-[1.65rem] right-24 z-[80] flex items-center gap-2 rounded-full glass-strong px-4 py-2.5 text-sm font-medium text-foreground shadow-glow-blue sm:bottom-8"
+          >
+            <span className="text-base">👋</span>
+            Hi! Ask me anything
+            <span className="absolute -right-1.5 top-1/2 h-3 w-3 -translate-y-1/2 rotate-45 bg-[#0b0e18]" />
+          </motion.button>
+        )}
+      </AnimatePresence>
+
       {/* Launcher */}
       <motion.button
         initial={{ scale: 0, opacity: 0 }}
@@ -59,6 +91,7 @@ export default function Assistant() {
         onClick={() => {
           setOpen((o) => !o);
           setPulse(false);
+          setShowHint(false);
         }}
         aria-label="Open AI assistant"
         className="fixed bottom-5 right-5 z-[80] flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-neon-blue to-neon-purple shadow-glow-purple sm:bottom-6 sm:right-6"
@@ -72,9 +105,12 @@ export default function Assistant() {
               <path d="M18 6 6 18M6 6l12 12" />
             </motion.svg>
           ) : (
-            <motion.div key="bot" initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }} className="text-2xl">
-              ◑
-            </motion.div>
+            <motion.svg key="bot" initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }} width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 8V4M8 8h8a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-6a2 2 0 0 1 2-2Z" />
+              <circle cx="9.5" cy="13" r="1" fill="white" stroke="none" />
+              <circle cx="14.5" cy="13" r="1" fill="white" stroke="none" />
+              <path d="M4 13H2M22 13h-2" />
+            </motion.svg>
           )}
         </AnimatePresence>
       </motion.button>
