@@ -16,7 +16,7 @@ import { useReducedMotion, useIsMobile } from "@/hooks/useMedia";
 
 function HoloPlatform() {
   return (
-    <group position={[0, -1.7, 0]}>
+    <group position={[0, -1.62, 0]}>
       <mesh rotation={[-Math.PI / 2, 0, 0]}>
         <ringGeometry args={[0.55, 0.6, 64]} />
         <meshBasicMaterial color="#38bdf8" toneMapped={false} transparent opacity={0.7} />
@@ -44,7 +44,7 @@ export default function AvatarCanvas() {
       shadows={false}
       className="!touch-pan-y"
     >
-      <PerspectiveCamera makeDefault fov={30} position={[0, 0.35, 5.6]} />
+      <PerspectiveCamera makeDefault fov={28} position={[0, 0.05, 2.7]} />
       <color attach="background" args={["#05060a"]} />
       <fog attach="fog" args={["#05060a", 4.5, 10]} />
 
@@ -88,7 +88,7 @@ export default function AvatarCanvas() {
         )}
 
         <ContactShadows
-          position={[0, -1.7, 0]}
+          position={[0, -1.62, 0]}
           opacity={0.5}
           scale={6}
           blur={2.6}
