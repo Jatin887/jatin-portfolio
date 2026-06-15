@@ -68,7 +68,7 @@ export default function Backdrop() {
       />
       <div
         className="glow-orb animate-pulse-glow"
-        style={{ top: "30%", right: "-5%", width: 480, height: 480, background: "#7c3aed", animationDelay: "1.5s" }}
+        style={{ top: "30%", right: "-5%", width: 480, height: 480, background: "#0d9488", animationDelay: "1.5s" }}
       />
       <div
         className="glow-orb animate-pulse-glow"
@@ -79,7 +79,7 @@ export default function Backdrop() {
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 70% 50% at 50% -10%, rgba(56,189,248,0.10), transparent 60%), radial-gradient(ellipse 60% 50% at 100% 100%, rgba(168,85,247,0.10), transparent 60%)",
+            "radial-gradient(ellipse 70% 50% at 50% -10%, rgba(56,189,248,0.10), transparent 60%), radial-gradient(ellipse 60% 50% at 100% 100%, rgba(45,212,191,0.10), transparent 60%)",
         }}
       />
     </div>

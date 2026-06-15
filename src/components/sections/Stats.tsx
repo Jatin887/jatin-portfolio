@@ -68,9 +68,9 @@ function Ring({ label, value, color }: { label: string; value: number; color: st
 
 const COMMIT_BARS = [
   { label: "Backend platform", value: 1612, color: "#38bdf8" },
-  { label: "Product UI", value: 611, color: "#f472b6" },
+  { label: "Product UI", value: 611, color: "#5eead4" },
   { label: "Connectors", value: 1000, color: "#34d399" },
-  { label: "Schema/contracts", value: 195, color: "#a855f7" },
+  { label: "Schema/contracts", value: 195, color: "#2dd4bf" },
 ];
 
 function BarChart() {

@@ -33,7 +33,7 @@ export default function CursorGlow() {
       const interactive = t.closest("a, button, [role='button'], input, textarea, .cursor-grow");
       ring.style.width = interactive ? "56px" : "30px";
       ring.style.height = interactive ? "56px" : "30px";
-      ring.style.borderColor = interactive ? "rgba(168,85,247,0.9)" : "rgba(56,189,248,0.7)";
+      ring.style.borderColor = interactive ? "rgba(45,212,191,0.9)" : "rgba(56,189,248,0.7)";
     };
 
     const loop = () => {
@@ -61,7 +61,7 @@ export default function CursorGlow() {
         className="absolute -left-[250px] -top-[250px] h-[500px] w-[500px] rounded-full"
         style={{
           background:
-            "radial-gradient(circle, rgba(56,189,248,0.10) 0%, rgba(168,85,247,0.06) 40%, transparent 70%)",
+            "radial-gradient(circle, rgba(56,189,248,0.10) 0%, rgba(45,212,191,0.06) 40%, transparent 70%)",
           willChange: "transform",
         }}
       />

@@ -269,7 +269,7 @@ export const projects: Project[] = [
     name: "CI/CD & Workflow Orchestration Platform",
     tagline: "One platform shipping 23 services to many clusters.",
     category: "Platform Engineering · DevOps",
-    accent: "#a855f7",
+    accent: "#2dd4bf",
     problem:
       "A growing microservice fleet needs fast, reliable delivery to dev, prod, sandbox and per-customer clusters without rebuilding everything on every commit or drowning the cluster in orphaned workflow resources.",
     solution:
@@ -346,7 +346,7 @@ export const projects: Project[] = [
     name: "AI-Powered Bug Analysis Agent",
     tagline: "An internal agent that triages bugs across teams.",
     category: "AI Tooling",
-    accent: "#f472b6",
+    accent: "#5eead4",
     problem:
       "Engineers spent significant cycles on manual root-cause analysis, and tribal debugging knowledge was hard to scale across a team.",
     solution:

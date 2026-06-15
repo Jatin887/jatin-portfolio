@@ -2,9 +2,9 @@ import type { SkillCategory } from "@/content/profile";
 
 export const categoryColors: Record<SkillCategory, string> = {
   Languages: "#38bdf8",
-  "Cloud & DevOps": "#a855f7",
+  "Cloud & DevOps": "#2dd4bf",
   "Backend & Data": "#22d3ee",
-  Frontend: "#f472b6",
+  Frontend: "#5eead4",
   "Identity & Security": "#34d399",
   "AI & Tooling": "#fbbf24",
 };

@@ -27,7 +27,7 @@ const channels = [
     label: "Email",
     handle: person.email,
     href: `mailto:${person.email}`,
-    color: "#a855f7",
+    color: "#2dd4bf",
     icon: (
       <>
         <rect x="3" y="5" width="18" height="14" rx="2" />

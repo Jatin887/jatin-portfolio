@@ -23,7 +23,7 @@ function HoloPlatform() {
       </mesh>
       <mesh rotation={[-Math.PI / 2, 0, 0]}>
         <ringGeometry args={[0.7, 0.72, 64]} />
-        <meshBasicMaterial color="#a855f7" toneMapped={false} transparent opacity={0.4} />
+        <meshBasicMaterial color="#2dd4bf" toneMapped={false} transparent opacity={0.4} />
       </mesh>
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.001, 0]}>
         <circleGeometry args={[0.55, 64]} />
@@ -53,15 +53,15 @@ export default function AvatarCanvas() {
       {/* strong frontal fill so the face/body read clearly */}
       <directionalLight position={[0, 0.8, 3]} intensity={3.2} color="#ffffff" />
       <directionalLight position={[2.5, 2.5, 2]} intensity={3} color="#cfe8ff" />
-      <directionalLight position={[-3, 1.5, 1]} intensity={2.2} color="#c4b5fd" />
+      <directionalLight position={[-3, 1.5, 1]} intensity={2.2} color="#99f6e4" />
       <pointLight position={[1.8, 0.2, 2]} intensity={8} color="#38bdf8" distance={9} />
-      <pointLight position={[-1.8, 0.4, 2]} intensity={6} color="#a855f7" distance={9} />
+      <pointLight position={[-1.8, 0.4, 2]} intensity={6} color="#2dd4bf" distance={9} />
       <spotLight position={[0, 3, 2]} angle={0.6} penumbra={1} intensity={3.5} color="#ffffff" />
 
       <Suspense fallback={null}>
         <Environment resolution={256}>
           <Lightformer intensity={2} color="#38bdf8" position={[-2, 1, 2]} scale={[3, 3, 1]} />
-          <Lightformer intensity={2.4} color="#a855f7" position={[2, 1, 1]} scale={[3, 4, 1]} />
+          <Lightformer intensity={2.4} color="#2dd4bf" position={[2, 1, 1]} scale={[3, 4, 1]} />
           <Lightformer intensity={1.2} color="#ffffff" position={[0, -1, 2]} scale={[5, 2, 1]} />
         </Environment>
 

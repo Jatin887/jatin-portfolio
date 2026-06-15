@@ -63,7 +63,7 @@ function Core() {
         />
       </Icosahedron>
       <Icosahedron args={[0.5, 2]}>
-        <meshStandardMaterial color="#a855f7" emissive="#a855f7" emissiveIntensity={1.6} />
+        <meshStandardMaterial color="#2dd4bf" emissive="#2dd4bf" emissiveIntensity={1.6} />
       </Icosahedron>
       <pointLight color="#38bdf8" intensity={8} distance={8} />
     </group>

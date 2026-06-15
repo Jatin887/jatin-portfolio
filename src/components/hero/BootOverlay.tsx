@@ -32,7 +32,7 @@ function Core() {
       />
       <div
         className="absolute inset-[38%] rounded-full bg-gradient-to-br from-neon-blue to-neon-purple animate-pulse-glow"
-        style={{ boxShadow: "0 0 28px rgba(56,189,248,0.8), 0 0 50px rgba(168,85,247,0.5)" }}
+        style={{ boxShadow: "0 0 28px rgba(56,189,248,0.8), 0 0 50px rgba(45,212,191,0.5)" }}
       />
       <motion.div
         className="absolute inset-0"
@@ -88,7 +88,7 @@ export default function BootOverlay({
           <div className="absolute inset-0 grid-bg opacity-40" />
           <div
             className="glow-orb animate-pulse-glow"
-            style={{ top: "20%", left: "35%", width: 360, height: 360, background: "#6d28d9" }}
+            style={{ top: "20%", left: "35%", width: 360, height: 360, background: "#0d9488" }}
           />
           <div className="relative flex flex-col items-center">
             <Core />
